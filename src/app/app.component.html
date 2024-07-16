@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-content>
     <app-state-selector (stateSelected)="onStateSelected($event)"></app-state-selector>
-    <app-county-selector [selectedState]="selectedState" (countySelected)="onCountySelected($event)"></app-county-selector>
+<app-county-selector [selectedState]="selectedState" (countySelected)="onCountySelected($event)"></app-county-selector>
     <app-chat-window [selectedState]="selectedState" [selectedCounty]="selectedCounty"></app-chat-window>
   </mat-card-content>
 </mat-card>

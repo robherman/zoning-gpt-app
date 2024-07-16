@@ -1,10 +1,8 @@
-<mat-form-field>
-    <mat-label>Select a county</mat-label>
-    <mat-select [(ngModel)]="selectedCounty" (selectionChange)="onCountyChange()" [disabled]="!selectedState || isLoading">
-      <mat-option *ngFor="let county of counties" [value]="county">
-        {{county}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
-  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+<app-searchable-select
+  [options]="counties"
+  placeholder="Select a county"
+  [disabled]="isDisabled"
+  (selectionChange)="onCountyChange($event)"
+  storageKey="selectedCounty"
+></app-searchable-select>
+<p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>

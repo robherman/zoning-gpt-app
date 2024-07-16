@@ -1,8 +1,6 @@
-<mat-form-field>
-    <mat-label>Select a state</mat-label>
-    <mat-select [(ngModel)]="selectedState" (selectionChange)="onStateChange()">
-      <mat-option *ngFor="let state of states" [value]="state">
-        {{state}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+<app-searchable-select
+  [options]="states"
+  placeholder="Select a state"
+  (selectionChange)="onStateChange($event)"
+  storageKey="selectedState"
+></app-searchable-select>
