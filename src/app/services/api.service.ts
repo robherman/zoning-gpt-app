@@ -20,6 +20,7 @@ interface ResultItem {
 }
 
 interface ParsedBody {
+  body_content: string;
   results: ResultItem[];
 }
 
@@ -92,9 +93,9 @@ export class ApiService {
 
     try {
       const parsedBody: ParsedBody = JSON.parse(response.body);
-      if (parsedBody.results && parsedBody.results.length > 0) {
+      if (parsedBody.body_content) {
         // Return the content of the first result
-        return parsedBody.results[0].content;
+        return parsedBody.body_content;
       } else {
         return 'No results found in the response.';
       }
