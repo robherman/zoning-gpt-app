@@ -1,0 +1,16 @@
+<div class="chat-container">
+    <div #chatMessagesContainer class="chat-messages">
+      <div *ngFor="let message of chatMessages">{{ message }}</div>
+      <div *ngIf="isLoading" class="loading-indicator">
+        <mat-spinner diameter="20"></mat-spinner>
+      </div>
+    </div>
+    <div class="chat-input">
+      <mat-form-field>
+        <input matInput [(ngModel)]="newMessage" placeholder="Type your message..." [disabled]="isLoading" (keyup.enter)="sendMessage()">
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="sendMessage()" [disabled]="isLoading || !newMessage.trim() || !selectedState || !selectedCounty">
+        Send
+      </button>
+    </div>
+  </div>

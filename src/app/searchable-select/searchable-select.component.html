@@ -1,0 +1,13 @@
+<div class="searchable-select" [class.disabled]="disabled">
+    <div class="select-input" (click)="toggleDropdown()">
+      {{ selectedOption || placeholder }}
+    </div>
+    <div class="dropdown" *ngIf="isOpen">
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." (click)="$event.stopPropagation()">
+      <ul>
+        <li *ngFor="let option of filteredOptions" (click)="selectOption(option)">
+          {{ option }}
+        </li>
+      </ul>
+    </div>
+  </div>
