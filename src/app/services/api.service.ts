@@ -71,8 +71,8 @@ export class ApiService {
     state: string,
     county: string
   ): Observable<string> {
-    const query = `${message}`;
-    //const query = `For state: ${state} and county: ${county}. ${message}`;
+    //const query = `${message}`;
+    const query = `For state: ${state} and county: ${county}. ${message}`;
 
     return this.http
       .post<ApiResponse>(this.apiUrl, { query: query })
