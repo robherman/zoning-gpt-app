@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  LocationSelectorComponent,
-  County,
-} from './location-selector/location-selector.component';
 import { ChatWindowComponent } from './chat-window/chat-window.component';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
+import { SuggestionsModalComponent } from './suggestions-modal/suggestions-modal.component';
+import { LocationSelectorComponent } from './location-selector/location-selector.component';
 
 @Component({
   selector: 'app-root',
@@ -20,18 +19,15 @@ import { MatCardModule } from '@angular/material/card';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  selectedCounty: County | null = null;
-  suggestions = [
-    { icon: '🏘️', text: 'Zoning regulations for residential areas' },
-    { icon: '🏢', text: 'Commercial property restrictions' },
-    { icon: '🌳', text: 'Green space requirements' },
-    { icon: '🚗', text: 'Parking regulations in urban areas' },
-    { icon: '🏗️', text: 'Building height limitations' },
-    { icon: '🏭', text: 'Industrial zone regulations' },
-    { icon: '🚧', text: 'Construction permit process' },
-    { icon: '🏠', text: 'Accessory dwelling unit rules' },
-  ];
-  onCountySelected(county: County) {
+  selectedCounty: any = null;
+
+  constructor(public dialog: MatDialog) {}
+
+  onCountySelected(county: any) {
     this.selectedCounty = county;
+  }
+
+  openSuggestionsModal() {
+    this.dialog.open(SuggestionsModalComponent);
   }
 }

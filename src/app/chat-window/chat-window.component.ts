@@ -22,8 +22,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   styleUrls: ['./chat-window.component.css'],
 })
 export class ChatWindowComponent {
-  @Input() selectedState: string = '';
-  @Input() selectedCounty: string = '';
+  @Input() selectedState?: string = '';
+  @Input() selectedCounty?: string = '';
 
   chatMessages: string[] = [];
   newMessage: string = '';

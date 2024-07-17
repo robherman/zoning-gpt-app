@@ -1,8 +1,0 @@
-<app-searchable-select
-  [options]="counties"
-  placeholder="Select a county"
-  [disabled]="isDisabled"
-  (selectionChange)="onCountyChange($event)"
-  storageKey="selectedCounty"
-></app-searchable-select>
-<p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>

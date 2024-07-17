@@ -1,22 +1,16 @@
-<mat-form-field appearance="outline" class="location-selector">
-  <input
-    type="text"
-    placeholder="Search Florida county"
-    matInput
-    [formControl]="countyCtrl"
-    [matAutocomplete]="auto"
-    (focus)="onFocus()"
-  />
-  <mat-autocomplete
-    #auto="matAutocomplete"
-    [displayWith]="displayFn"
-    (optionSelected)="onSelectionChange($event)"
-  >
-    <mat-option
-      *ngFor="let county of filteredCounties | async"
-      [value]="county"
-    >
-      {{ county.county }}
-    </mat-option>
-  </mat-autocomplete>
-</mat-form-field>
+<mat-form-field appearance="fill">
+    <mat-label>Select a county</mat-label>
+    <input type="text"
+           placeholder="Start typing..."
+           matInput
+           [formControl]="countyCtrl"
+           [matAutocomplete]="auto"
+           (focus)="onFocus()">
+    <mat-autocomplete #auto="matAutocomplete" 
+                      [displayWith]="displayFn"
+                      (optionSelected)="onSelectionChange($event)">
+      <mat-option *ngFor="let county of filteredCounties | async" [value]="county">
+        {{county.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>

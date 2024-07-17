@@ -17,6 +17,7 @@ header {
   font-weight: bold;
   color: #333;
   margin: 0;
+  text-align: center;
 }
 
 .welcome-title {
@@ -99,4 +100,15 @@ header {
   color: #888;
   font-size: 12px;
   margin-top: 10px;
+}
+
+.suggestions-link {
+  color: #1a73e8;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-bottom: 20px;
+}
+
+.suggestions-link:hover {
+  text-decoration: none;
 }

@@ -1,0 +1,12 @@
+<h2 class="welcome-title">Zoning GPT is your ideal zoning companion. It can answer lots of things. Here's some examples that you can get started with:</h2>
+<mat-dialog-content>
+  <div class="suggestion-grid">
+    <div class="suggestion-item" *ngFor="let suggestion of suggestions">
+      <span class="suggestion-icon">{{suggestion.icon}}</span>
+      <span>{{suggestion.text}}</span>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [matDialogClose]="true">Close</button>
+</mat-dialog-actions>
