@@ -1,16 +1,27 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatAutocompleteModule, MatAutocompleteTrigger, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { Observable, Subscription, forkJoin } from 'rxjs';
-import { map, startWith, switchMap, catchError, tap } from 'rxjs/operators';
+import {
+  MatAutocompleteModule,
+  MatAutocompleteTrigger,
+  MatAutocompleteSelectedEvent,
+} from '@angular/material/autocomplete';
+import { Observable, Subscription } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { GeographyService } from '../services/geography.service';
 
 export interface County {
-  state: string;
   county: string;
+  state: string;
 }
 
 @Component({
@@ -24,12 +35,13 @@ export interface County {
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatAutocompleteModule
-  ]
+    MatAutocompleteModule,
+  ],
 })
 export class LocationSelectorComponent implements OnInit, OnDestroy {
   @Output() countySelected = new EventEmitter<County>();
-  @ViewChild(MatAutocompleteTrigger) autocompleteTrigger!: MatAutocompleteTrigger;
+  @ViewChild(MatAutocompleteTrigger)
+  autocompleteTrigger!: MatAutocompleteTrigger;
 
   countyCtrl = new FormControl<string | County>('');
   filteredCounties: Observable<County[]>;
@@ -39,7 +51,7 @@ export class LocationSelectorComponent implements OnInit, OnDestroy {
   constructor(private geographyService: GeographyService) {
     this.filteredCounties = this.countyCtrl.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value))
+      map((value) => this._filter(value))
     );
   }
 
@@ -52,26 +64,15 @@ export class LocationSelectorComponent implements OnInit, OnDestroy {
   }
 
   loadCounties() {
-    const countiesObservable = this.geographyService.getStates().pipe(
-      switchMap(states => {
-        const countyObservables = states.map(state =>
-          this.geographyService.getCounties(state).pipe(
-            map(counties => counties.map(county => ({ state, county } as County))),
-            catchError(() => [])
-          )
-        );
-        return forkJoin(countyObservables);
-      }),
-      map(countyArrays => countyArrays.flat()),
-      tap(counties => {
-        this.allCounties = counties;
-      })
-    );
-
     this.subscription.add(
-      countiesObservable.subscribe({
-        next: () => {},
-        error: error => console.error('Error loading counties:', error)
+      this.geographyService.getFloridaCounties().subscribe({
+        next: (counties) => {
+          this.allCounties = counties.map((county) => ({
+            county,
+            state: 'Florida',
+          }));
+        },
+        error: (error) => console.error('Error loading counties:', error),
       })
     );
   }
@@ -80,19 +81,19 @@ export class LocationSelectorComponent implements OnInit, OnDestroy {
     if (!value) {
       return this.allCounties;
     }
-    
-    const filterValue = typeof value === 'string' 
-      ? value.toLowerCase() 
-      : value.county.toLowerCase();
 
-    return this.allCounties.filter(county => 
-      county.county.toLowerCase().includes(filterValue) ||
-      county.state.toLowerCase().includes(filterValue)
+    const filterValue =
+      typeof value === 'string'
+        ? value.toLowerCase()
+        : value.county.toLowerCase();
+
+    return this.allCounties.filter((county) =>
+      county.county.toLowerCase().includes(filterValue)
     );
   }
 
   displayFn(county: County | null): string {
-    return county ? `${county.county}, ${county.state}` : '';
+    return county ? `${county.county}` : '';
   }
 
   onSelectionChange(event: MatAutocompleteSelectedEvent) {
