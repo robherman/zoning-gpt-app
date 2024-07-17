@@ -21,7 +21,16 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class AppComponent {
   selectedCounty: County | null = null;
-
+  suggestions = [
+    { icon: '🏘️', text: 'Zoning regulations for residential areas' },
+    { icon: '🏢', text: 'Commercial property restrictions' },
+    { icon: '🌳', text: 'Green space requirements' },
+    { icon: '🚗', text: 'Parking regulations in urban areas' },
+    { icon: '🏗️', text: 'Building height limitations' },
+    { icon: '🏭', text: 'Industrial zone regulations' },
+    { icon: '🚧', text: 'Construction permit process' },
+    { icon: '🏠', text: 'Accessory dwelling unit rules' },
+  ];
   onCountySelected(county: County) {
     this.selectedCounty = county;
   }

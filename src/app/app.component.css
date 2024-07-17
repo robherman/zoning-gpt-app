@@ -1,14 +1,102 @@
-mat-card {
-    max-width: 800px;
-    margin: 20px auto;
-  }
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
 
-  .app-title {
-    font-size: 2rem; /* Reduce font size */
-    font-weight: 500; /* Make it less bold */
-    color: #333; /* Darker, less harsh color */
-    margin-bottom: 20px; /* Add some space below the title */
-    text-align: center; /* Center the title */
-    font-family: 'Arial', sans-serif; /* Use a clean, modern font */
-    letter-spacing: 0.5px; /* Slight letter spacing for readability */
-  }
+header {
+  margin-bottom: 20px;
+}
+
+.app-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.welcome-title {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.suggestion-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.suggestion-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  background-color: #f7f7f8;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  text-align: center;
+}
+
+.suggestion-item:hover {
+  background-color: #e5e5e5;
+  transform: translateY(-2px);
+}
+
+.suggestion-icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 10px;
+}
+
+.suggestion-item span {
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.input-container {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.chat-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.send-button {
+  background-color: #19c37d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.send-button:hover {
+  background-color: #15a067;
+}
+
+.send-icon {
+  font-size: 18px;
+}
+
+.disclaimer {
+  text-align: center;
+  color: #888;
+  font-size: 12px;
+  margin-top: 10px;
+}
