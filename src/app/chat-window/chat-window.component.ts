@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { County } from '../models/county.model';
 
 @Component({
   selector: 'app-chat-window',
@@ -22,8 +23,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   styleUrls: ['./chat-window.component.css'],
 })
 export class ChatWindowComponent {
-  @Input() selectedState?: string = '';
-  @Input() selectedCounty?: string = '';
+  @Input() selectedCounty: County | undefined;
 
   chatMessages: string[] = [];
   newMessage: string = '';
@@ -32,14 +32,14 @@ export class ChatWindowComponent {
   constructor(private apiService: ApiService) {}
 
   sendMessage() {
-    if (this.newMessage.trim() && this.selectedState && this.selectedCounty) {
+    if (this.newMessage.trim() && this.selectedCounty) {
       const userMessage = this.newMessage.trim();
       this.chatMessages.push(`You: ${userMessage}`);
       this.newMessage = '';
       this.isLoading = true;
 
       this.apiService
-        .sendChatMessage(userMessage, this.selectedState, this.selectedCounty)
+        .sendChatMessage(userMessage, this.selectedCounty)
         .subscribe({
           next: (response: string) => {
             this.chatMessages.push(`Zoning GPT: ${response}`);

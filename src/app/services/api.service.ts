@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, delay, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { County } from '../models/county.model';
 
 interface ApiResponse {
   statusCode: number;
@@ -42,26 +43,23 @@ export class ApiService {
 
   sendChatMessage(
     message: string,
-    state: string,
-    county: string
+    county: County
   ): Observable<any> {
     if (environment.useMockApi) {
-      return this.getMockResponse(message, state, county);
+      return this.getMockResponse(message, county);
     } else {
-      return this.getRealApiResponse(message, state, county);
+      return this.getRealApiResponse(message, county);
     }
   }
 
   private getMockResponse(
     message: string,
-    state: string,
-    county: string
+    county: County
   ): Observable<any> {
     const randomResponse =
       this.mockResponses[Math.floor(Math.random() * this.mockResponses.length)];
     const formattedResponse = randomResponse
-      .replace('{state}', state)
-      .replace('{county}', county);
+      .replace('{county}', county.name);
 
     // Simulate network delay
     return of({ message: formattedResponse }).pipe(delay(1000));
@@ -69,11 +67,10 @@ export class ApiService {
 
   private getRealApiResponse(
     message: string,
-    state: string,
-    county: string
+    county: County
   ): Observable<string> {
     //const query = `${message}`;
-    const query = `For state: ${state} and county: ${county}. ${message}`;
+    const query = `For state: ${county.name}. ${message}`;
 
     return this.http
       .post<ApiResponse>(this.apiUrl, { query: query })
