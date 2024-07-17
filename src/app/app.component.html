@@ -1,7 +1,15 @@
+<h1 class="app-title">Zoning GPT Playground</h1>
+
 <mat-card>
   <mat-card-content>
-    <app-state-selector (stateSelected)="onStateSelected($event)"></app-state-selector>
-<app-county-selector [selectedState]="selectedState" (countySelected)="onCountySelected($event)"></app-county-selector>
-    <app-chat-window [selectedState]="selectedState" [selectedCounty]="selectedCounty"></app-chat-window>
+    <app-location-selector
+      (countySelected)="onCountySelected($event)"
+    ></app-location-selector>
+    <app-chat-window
+      *ngIf="selectedCounty"
+      [selectedState]="selectedCounty.state"
+      [selectedCounty]="selectedCounty.county"
+    >
+    </app-chat-window>
   </mat-card-content>
 </mat-card>

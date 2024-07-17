@@ -1,0 +1,22 @@
+<mat-form-field>
+  <input
+    type="text"
+    placeholder="Search county"
+    matInput
+    [formControl]="countyCtrl"
+    [matAutocomplete]="auto"
+    (focus)="onFocus()"
+  />
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    [displayWith]="displayFn"
+    (optionSelected)="onSelectionChange($event)"
+  >
+    <mat-option
+      *ngFor="let county of filteredCounties | async"
+      [value]="county"
+    >
+      {{ county.county }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

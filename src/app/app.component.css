@@ -2,3 +2,13 @@ mat-card {
     max-width: 800px;
     margin: 20px auto;
   }
+
+  .app-title {
+    font-size: 2rem; /* Reduce font size */
+    font-weight: 500; /* Make it less bold */
+    color: #333; /* Darker, less harsh color */
+    margin-bottom: 20px; /* Add some space below the title */
+    text-align: center; /* Center the title */
+    font-family: 'Arial', sans-serif; /* Use a clean, modern font */
+    letter-spacing: 0.5px; /* Slight letter spacing for readability */
+  }
