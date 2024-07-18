@@ -1,15 +1,18 @@
-<div class="chat-container">
+<div class="chat-container" #chatContainer>
   <div class="chat-messages">
-    <div *ngFor="let message of chatMessages" class="message" [ngClass]="{'user': message.startsWith('You: '), 'bot': message.startsWith('Bot: ')}">
+    <div *ngFor="let message of chatMessages" class="message" [ngClass]="{'user': message.startsWith('You: '), 'bot': message.startsWith('Zoning GPT: ')}">
       {{ message }}
+    </div>
+    <div *ngIf="isLoading" class="message bot loading">
+      <mat-spinner diameter="20"></mat-spinner>
+      <span>Zoning GPT is thinking...</span>
     </div>
   </div>
 </div>
-<footer>
-  <div class="input-container">
-    <input type="text" (keydown.enter)="sendMessage()" placeholder="Type your question here" [(ngModel)]="newMessage" class="chat-input">
-    <button class="send-button" (click)="sendMessage()" [disabled]="!selectedCounty || isLoading">
-      <span class="send-icon">➤</span>
-    </button>
-  </div>
-</footer>
+
+<div class="input-container">
+  <input [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" placeholder="Type your message..." class="chat-input" [disabled]="isLoading">
+  <button class="send-button" (click)="sendMessage()" [disabled]="isLoading || !newMessage.trim() || !selectedCounty">
+    <span class="send-icon">➤</span>
+  </button>
+</div>

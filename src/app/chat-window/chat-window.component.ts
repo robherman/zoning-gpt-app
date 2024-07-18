@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../services/api.service';
@@ -22,14 +22,25 @@ import { County } from '../models/county.model';
   templateUrl: './chat-window.component.html',
   styleUrls: ['./chat-window.component.css'],
 })
-export class ChatWindowComponent {
+export class ChatWindowComponent implements AfterViewChecked {
   @Input() selectedCounty: County | undefined;
+  @ViewChild('chatContainer') private chatContainer!: ElementRef;
 
   chatMessages: string[] = [];
   newMessage: string = '';
   isLoading: boolean = false;
 
   constructor(private apiService: ApiService) {}
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
+    } catch(err) { }
+  }
 
   sendMessage() {
     if (this.newMessage.trim() && this.selectedCounty) {

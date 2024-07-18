@@ -7,10 +7,16 @@
   margin-bottom: 20px;
 }
 
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+}
+
 .message {
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 5px;
+  max-width: 70%;
 }
 
 .user {
@@ -21,6 +27,15 @@
 .bot {
   background-color: #e5e5e5;
   align-self: flex-start;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+}
+
+.loading mat-spinner {
+  margin-right: 10px;
 }
 
 .chat-input {
@@ -44,6 +59,11 @@
 
 .send-button:hover {
   background-color: #15a067;
+}
+
+.send-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 .send-icon {

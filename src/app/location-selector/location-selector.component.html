@@ -10,7 +10,7 @@
                       [displayWith]="displayFn"
                       (optionSelected)="onSelectionChange($event)">
       <mat-option *ngFor="let county of filteredCounties | async" [value]="county">
-        {{county.name}}
+        {{county.name}}, {{county.state}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
