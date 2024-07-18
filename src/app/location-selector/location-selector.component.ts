@@ -55,7 +55,7 @@ export class LocationSelectorComponent implements OnInit {
   }
 
   displayFn(county: County): string {
-    return county ? `${county.name}` : '';
+    return county ? `${county.name}, ${county.state}` : '';
   }
 
   onSelectionChange(event: MatAutocompleteSelectedEvent) {
